@@ -1,12 +1,16 @@
-package Data;
+package data;
 
+import com.github.javafaker.Faker;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Random;
 
 
 public class DataHelper {
+
+    private static final Faker faker = new Faker(new Locale("en"));
     private static final Random random = new Random();
 
     public static String getApprovedCardNumber() {
@@ -26,9 +30,6 @@ public class DataHelper {
         return generateRandomDigits(randomNumberLength);
     }
 
-    public static String getEmptyCardNumber() {
-        return "";
-    }
 
     public static String getOneMonthAgoMonth() {
         LocalDate currentDate = LocalDate.now();
@@ -42,9 +43,9 @@ public class DataHelper {
         return String.format("%02d", currentYear % 100);
     }
 
-    public static String getCurrentYearPlus6() {
+    public static String getCurrentYearPlus5() {
         int currentYear = Integer.parseInt(getCurrentYear());
-        int yearPlus6 = currentYear + 6;
+        int yearPlus6 = currentYear + 5;
         return String.format("%02d", yearPlus6 % 100);
     }
 
@@ -66,8 +67,26 @@ public class DataHelper {
         return "";
     }
 
+    public static String getInvalidYear() {
+        return "00";
+    }
+
     public static String getEmptyYear() {
         return "";
+    }
+
+    public static String getEmptyNumberCard() {
+        return "";
+    }
+
+
+    public static String getNextMonth() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate nextMonth = currentDate.plusMonths(1);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM");
+        String formattedMonth = nextMonth.format(formatter);
+
+        return formattedMonth;
     }
 
     public static String getRandomYear() {
@@ -79,6 +98,13 @@ public class DataHelper {
         int randomIndex = random.nextInt(names.length);
         return names[randomIndex];
     }
+
+    public static String getRandomCyrillicName() {
+        String[] names = {"Вадим", "Антон", "Дима", "Елена", "Ира", "Кристина", "Владимир", "Катя"};
+        int randomIndex = random.nextInt(names.length);
+        return names[randomIndex];
+    }
+
 
     public static String getRandomOwnerNumber() {
         return String.valueOf(random.nextInt(10));
@@ -115,7 +141,16 @@ public class DataHelper {
         }
         return sb.toString();
     }
+
+    public static String getCardNumberNothing() {
+        return faker.number().digits(16);
+
+
+    }
 }
+
+
+
 
 
 
