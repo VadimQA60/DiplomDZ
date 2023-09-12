@@ -37,6 +37,11 @@ public class DataHelper {
         return oneMonthAgo.format(DateTimeFormatter.ofPattern("MM"));
     }
 
+    public static String getYearWithOneValue() {
+        return generateRandomDigits(1);
+    }
+
+
     public static String getCurrentYear() {
         LocalDate currentDate = LocalDate.now();
         int currentYear = currentDate.getYear();
