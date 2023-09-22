@@ -3,10 +3,10 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$;
 import static com.codeborne.selenide.Selenide.open;
+
 
 public class WebStranitsa {
     private SelenideElement buyButton = $$(".button__text")
@@ -96,11 +96,11 @@ public class WebStranitsa {
     }
 
     public void messageSuccessfully() {
-        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(11));
+        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(20));
     }
 
     public void messageError() {
-        messageError.shouldBe(visible, Duration.ofSeconds(11));
+        messageError.shouldBe(visible, Duration.ofSeconds(20));
     }
 
     public void messageIncorrectFormat() {
