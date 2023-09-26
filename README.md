@@ -4,7 +4,11 @@
 
 ## **Документация**
 
+[Отчет об автоматизации]https://github.com/VadimQA60/DiplomDZ/blob/main/Docs/automationReport.md
 
+[План автоматизации тестирования]https://github.com/VadimQA60/DiplomDZ/blob/main/Docs/plan.md
+
+[Отчёт по итогам тестирования]https://github.com/VadimQA60/DiplomDZ/blob/main/Docs/testingReport.md
 
 ### _Описание приложения_
 
