@@ -1,12 +1,22 @@
 package tests;
 
+import data.DataHelperDB;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.WebStranitsa;
 import data.DataHelper;
 
+import static com.codeborne.selenide.Selenide.open;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestWebSite {
+
+    @BeforeEach
+    void clearDatabaseTables() {
+        open("http://localhost:8080/");
+        DataHelperDB.clearTables();
+    }
 
     WebStranitsa webStranitsa = new WebStranitsa();
 
@@ -22,6 +32,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageSuccessfully();
+        assertEquals("APPROVED", DataHelperDB.findPayStatus());
 
     }
 
@@ -37,7 +48,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageSuccessfully();
-
+        assertEquals("APPROVED", DataHelperDB.findCreditStatus());
     }
 
 
@@ -52,7 +63,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageError();
-
+        assertEquals("DECLINED", DataHelperDB.findPayStatus());
     }
 
 
@@ -67,7 +78,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageError();
-
+        assertEquals("DECLINED", DataHelperDB.findCreditStatus());
     }
 
     @Test
@@ -81,7 +92,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageIncorrectFormat();
-
+        assertEquals(0, DataHelperDB.getOrderEntityCount());
     }
 
     @Test
@@ -95,7 +106,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageIncorrectFormat();
-
+        assertEquals(0, DataHelperDB.getOrderEntityCount());
     }
 
     @Test
@@ -109,6 +120,7 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageError();
+        assertEquals(0, DataHelperDB.getOrderEntityCount());
     }
 
     @Test
@@ -158,7 +170,7 @@ public class TestWebSite {
     public void testInvalidNumber() {
         webStranitsa.purcHaseCash();
         webStranitsa.setCardNumber(DataHelper.getRandomCardNumber());
-        webStranitsa.setCardMonth(DataHelper.getOneMonthAgoMonth());
+        webStranitsa.setCardMonth(DataHelper.getMonthWithOneValue());
         webStranitsa.setCardYear(DataHelper.getCurrentYear());
         webStranitsa.setCardOwner(DataHelper.getRandomOwnerName());
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
@@ -240,7 +252,7 @@ public class TestWebSite {
 
     @Test
     @DisplayName("Ввод данных в поле Год с 1 значением во вкладке Купить")
-    public void testYearWithOneValue(){
+    public void testYearWithOneValue() {
         webStranitsa.purcHaseCash();
         webStranitsa.setCardNumber(DataHelper.getRandomCardNumber());
         webStranitsa.setCardMonth(DataHelper.getNextMonth());
@@ -250,9 +262,6 @@ public class TestWebSite {
         webStranitsa.clickContinueButton();
         webStranitsa.messageIncorrectFormat();
     }
-
-
-
 
     @Test
     @DisplayName("Ввод данных в поле Год с меньшим значением текущего года во вкладке Купить")
@@ -269,7 +278,7 @@ public class TestWebSite {
     }
 
     @Test
-    @DisplayName("Ввод данных в поле Год со значением 5+ лет во вкладке Купить")
+    @DisplayName("Ввод данных в поле Год со значением 6+ лет во вкладке Купить")
     public void testYearPlus5() {
         webStranitsa.purcHaseCash();
         webStranitsa.setCardNumber(DataHelper.getRandomCardNumber());
@@ -292,7 +301,7 @@ public class TestWebSite {
         webStranitsa.setCardOwner(DataHelper.getRandomOwnerName());
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
-        webStranitsa.messageInvalidDate();
+        webStranitsa.messageCardExpired();
     }
 
     @Test
@@ -337,7 +346,6 @@ public class TestWebSite {
         webStranitsa.messageIncorrectFormat();
 
     }
-
 
     @Test
     @DisplayName("Ввод данных с пустым полем Номер карты во вкладке Купить в кредит")
@@ -427,7 +435,7 @@ public class TestWebSite {
     public void testCreditInvalidNumber() {
         webStranitsa.buyInCredit();
         webStranitsa.setCardNumber(DataHelper.getRandomCardNumber());
-        webStranitsa.setCardMonth(DataHelper.getOneMonthAgoMonth());
+        webStranitsa.setCardMonth(DataHelper.getMonthWithOneValue());
         webStranitsa.setCardYear(DataHelper.getCurrentYear());
         webStranitsa.setCardOwner(DataHelper.getRandomOwnerName());
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
@@ -504,12 +512,11 @@ public class TestWebSite {
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
         webStranitsa.messageIncorrectFormat();
-
     }
 
     @Test
     @DisplayName("Ввод данных в поле Год с 1 значением во вкладке Купить в кредит")
-    public void testCreditYearWithOneValue(){
+    public void testCreditYearWithOneValue() {
         webStranitsa.buyInCredit();
         webStranitsa.setCardNumber(DataHelper.getRandomCardNumber());
         webStranitsa.setCardMonth(DataHelper.getNextMonth());
@@ -519,9 +526,6 @@ public class TestWebSite {
         webStranitsa.clickContinueButton();
         webStranitsa.messageIncorrectFormat();
     }
-
-
-
 
     @Test
     @DisplayName("Ввод данных в поле Год с меньшим значением текущего года во вкладке Купить в кредит")
@@ -561,8 +565,9 @@ public class TestWebSite {
         webStranitsa.setCardOwner(DataHelper.getRandomOwnerName());
         webStranitsa.setCardCVV(DataHelper.getRandomCvc());
         webStranitsa.clickContinueButton();
-        webStranitsa.messageInvalidDate();
+        webStranitsa.messageCardExpired();
     }
+
 
     @Test
     @DisplayName("Ввод данных в поле CVC/CVV с пустым значением во вкладке Купить в кредит")
@@ -607,4 +612,5 @@ public class TestWebSite {
 
     }
 }
+
 

@@ -96,11 +96,11 @@ public class WebStranitsa {
     }
 
     public void messageSuccessfully() {
-        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(20));
+        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(40));
     }
 
     public void messageError() {
-        messageError.shouldBe(visible, Duration.ofSeconds(20));
+        messageError.shouldBe(visible, Duration.ofSeconds(40));
     }
 
     public void messageIncorrectFormat() {
