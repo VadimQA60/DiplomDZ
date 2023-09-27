@@ -1,9 +1,9 @@
 package tests;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import data.DataHelperDB;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.*;
 import pages.WebStranitsa;
 import data.DataHelper;
 
@@ -12,13 +12,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestWebSite {
 
+    WebStranitsa webStranitsa = new WebStranitsa();
+
     @BeforeEach
     void clearDatabaseTables() {
         open("http://localhost:8080/");
         DataHelperDB.clearTables();
     }
 
-    WebStranitsa webStranitsa = new WebStranitsa();
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
+    }
+
 
     @Test
 

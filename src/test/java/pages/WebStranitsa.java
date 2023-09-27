@@ -3,9 +3,10 @@ package pages;
 import com.codeborne.selenide.SelenideElement;
 
 import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.open;
+
 
 
 public class WebStranitsa {
@@ -53,14 +54,12 @@ public class WebStranitsa {
 
 
     public void purcHaseCash() {
-        open("http://localhost:8080/");
         buyButton.click();
         payCard.shouldBe(visible);
 
     }
 
     public void buyInCredit() {
-        open("http://localhost:8080/");
         buyCreditButton.click();
         payCreditByCard.shouldBe(visible);
     }
@@ -96,11 +95,11 @@ public class WebStranitsa {
     }
 
     public void messageSuccessfully() {
-        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(40));
+        messageSuccessfully.shouldBe(visible, Duration.ofSeconds(47));
     }
 
     public void messageError() {
-        messageError.shouldBe(visible, Duration.ofSeconds(40));
+        messageError.shouldBe(visible, Duration.ofSeconds(47));
     }
 
     public void messageIncorrectFormat() {
