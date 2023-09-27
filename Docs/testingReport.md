@@ -9,11 +9,14 @@
 
 Всего было выполнено 34 тест-кейсов.
 
-https://monosnap.com/file/kXAN3xjwYiLStn2jHsbOmiIA1SqjnY
+![alluresuite](https://github.com/VadimQA60/DiplomDZ/assets/128289306/18fb1c9b-11d0-47fc-8439-d45de3d37479)
+
 
 ## **_3. Процент успешных и неуспешных тест-кейсов:_**
 
-https://monosnap.com/file/7nz0WTaIRXGmYHFGTIpwhT2JhC88kf
+![Allure1 1](https://github.com/VadimQA60/DiplomDZ/assets/128289306/5f0b63d7-cc11-43b9-b637-8c74685894e4)
+![allure3](https://github.com/VadimQA60/DiplomDZ/assets/128289306/4c0311f3-95b5-4679-9eff-7cb4302c3a48)
+
 
 Из 42 тестов завершились успешно 34 , что составляет приблизительно 80.95% от общего количества
 тест-кейсов. 8 тестов завершились с ошибками, что составляет приблизительно 19.05% от общего количества тест-кейсов.
